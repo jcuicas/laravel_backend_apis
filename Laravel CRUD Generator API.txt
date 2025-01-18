@@ -57,3 +57,21 @@ Laravel CRUD Generator API
 12.- Ejecuta el servidor de laravel con el comando:
 
 	php artisan serve
+	
+================================================================
+Scramble – Generador de documentación Laravel OpenAPI (Swagger)
+================================================================
+
+1.- Puedes instalar Scramble a través del compositor:
+
+	composer require dedoc/scramble
+	
+2.- De manera opcional, puedes publicar el archivo de configuración del paquete:
+
+	php artisan vendor:publish --provider="Dedoc\Scramble\ScrambleServiceProvider" --tag="scramble-config"
+	
+3.- Cuando se instala Scramble, se agregan 2 rutas a su aplicación:
+
+	/docs/api -> Visor de interfaz de usuario para su documentación
+	
+	/docs/api.json -> Abra el documento API en formato JSON que describe su API.

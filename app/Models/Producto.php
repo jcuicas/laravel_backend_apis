@@ -30,6 +30,10 @@ class Producto extends Model
      */
     protected $fillable = ['codigo', 'producto', 'idcategoria', 'existencia'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

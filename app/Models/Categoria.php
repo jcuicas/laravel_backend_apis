@@ -29,6 +29,10 @@ class Categoria extends Model
      */
     protected $fillable = ['categoria'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
