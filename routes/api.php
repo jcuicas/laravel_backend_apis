@@ -10,19 +10,20 @@ use App\Http\Controllers\Api\CategoriaController;
     return $request->user();
 })->middleware('auth:sanctum'); */
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
-Route::get('/user', [AuthController::class, 'user'])->middleware('auth:api')->name('user');
+//Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
+//Route::get('/user', [AuthController::class, 'user'])->middleware('auth:api')->name('user');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 // Rutas protegidas por middleware 'auth:api'
 Route::middleware(['auth:api'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/user', [AuthController::class, 'user'])->name('user');
+    Route::apiResource('/productos', ProductoController::class);
+    Route::apiResource('/categorias', CategoriaController::class);
 });
 
-/* Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
-Route::get('/user', [AuthController::class, 'user'])->middleware('auth:api')->name('user'); */
+//Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
+//Route::get('/user', [AuthController::class, 'user'])->middleware('auth:api')->name('user');
 
-Route::apiResource('productos', ProductoController::class);
-Route::apiResource('categorias', CategoriaController::class);

@@ -14,12 +14,12 @@ class AuthController extends Controller
         $registerdData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
         ]);
 
         $user = User::create($registerdData);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token');
 
         return response()->json([
             'access_token' => $token,
@@ -38,8 +38,8 @@ class AuthController extends Controller
             return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
 
-        $user = $request->user;
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $user = $request->user();
+        $token = $user->createToken('auth_token');
 
         return response()->json([
             'access_token' => $token,
@@ -49,7 +49,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user()->token()->revoke();
 
         return response()->json([
             'message' => 'Sesión cerrada correctamente',
